@@ -1,0 +1,11 @@
+name = Domain Mollom
+description = Set Mollom Public and Private keys per domain.
+package = Domain Access
+dependencies[] = mollom
+dependencies[] = domain
+dependencies[] = domain_conf
+core = 6.x
+
+version = "6.x-1.x-dev"
+core = "6.x"
+project = "domain"
