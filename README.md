@@ -1,4 +1,4 @@
-# Domain Mollom
+# Domain Mollom 6.x-1.0
 Domain Mollom extension allows each domain to have it's own public and private Mollom keys.
 
 **Description**  
