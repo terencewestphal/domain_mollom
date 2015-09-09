@@ -1,11 +1,11 @@
 name = Domain Mollom
-description = Set Mollom Public and Private keys per domain.
+description = Domain Mollom extension allows each domain to have it's own public and private Mollom keys.
 package = Domain Access
 dependencies[] = mollom
 dependencies[] = domain
 dependencies[] = domain_conf
 core = 6.x
 
-version = "6.x-1.x-dev"
+version = "6.x-1.0"
 core = "6.x"
 project = "domain"
