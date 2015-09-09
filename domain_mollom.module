@@ -1,0 +1,51 @@
+<?php
+
+function mollom_domainwarnings() {
+  // These are the forms for variables set by Domain Conf.
+  return array(
+    'mollom_admin_settings'
+  );
+}
+
+function mollom_domainbatch() {
+  if (module_exists('mollom')) {
+	  $batch = array();
+	  $batch['mollom_public_key'] = array(
+	    '#form' => array(
+	      '#title' => t('Public Key'),
+	      '#type' => 'textfield',
+	      '#size' => 40,
+	      '#maxlength' => 80,
+	      '#description' => t('Enter the Mollom public key'),
+	    ),
+	    '#domain_action' => 'domain_conf',
+	    '#meta_description' => t('Set the Mollom public key.'),
+	    '#variable' => 'mollom_public_key',
+		'#system_default' => variable_get('mollom_public_key', 0),
+	    '#validate' => 'mollom_public_key_validate',
+	    '#data_type' => 'string',
+	    '#weight' => 0,
+	    '#group' => t('Mollom'),
+	    '#module' => t('Mollom'),
+	  );
+	  $batch['mollom_private_key'] = array(
+	    '#form' => array(
+	      '#title' => t('Private Key'),
+	      '#type' => 'textfield',
+	      '#size' => 40,
+	      '#maxlength' => 80,
+	      '#description' => t('Enter the Mollom private key'),
+	    ),
+	    '#domain_action' => 'domain_conf',
+	    '#meta_description' => t('Set the Mollom private key.'),
+	    '#variable' => 'mollom_private_key',
+		'#system_default' => variable_get('mollom_private_key', 0),
+	    '#validate' => 'mollom_private_key_validate',
+	    '#data_type' => 'string',
+	    '#weight' => 0,
+	    '#group' => t('Mollom'),
+	    '#module' => t('Mollom'),
+	  );
+	  return $batch;
+	}
+}
