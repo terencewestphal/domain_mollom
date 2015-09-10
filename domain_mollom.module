@@ -1,7 +1,6 @@
 <?php
 
 function mollom_domainwarnings() {
-  // These are the forms for variables set by Domain Conf.
   return array(
     'mollom_admin_settings'
   );
