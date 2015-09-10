@@ -12,9 +12,11 @@ matrix:
   fast_finish: true
   allow_failures:
     - php: hhvm
+    
+phpunit
 
 mysql:
-  database: travis_ci_drupal_module_example_test
+  database: domain_mollom
   username: root
   encoding: utf8
 
@@ -37,16 +39,17 @@ before_script:
   - cd ../..
 
   # create new site, stubbing sendmail path with true to prevent delivery errors and manually resolving drush path
-  - mysql -e 'create database travis_ci_drupal_module_example_test'
-  - php -d sendmail_path=`which true` ~/.composer/vendor/bin/drush.php --yes core-quick-drupal --profile=testing --no-server --db-url=mysql://root:@127.0.0.1/travis_ci_drupal_module_example_test --enable=simpletest travis_ci_drupal_module_example_test
+  - mysql -e 'create database domain_mollom'
+  - php -d sendmail_path=`which true` ~/.composer/vendor/bin/drush.php --yes core-quick-drupal-6.x --profile=testing --no-server --db-url=mysql://root:@127.0.0.1/domain_mollom
 
-  # reference and enable travis_ci_drupal_module_example in build site
-  - ln -s $(readlink -e $(cd -)) travis_ci_drupal_module_example_test/drupal/sites/all/modules/travis_ci_drupal_module_example
-  - cd travis_ci_drupal_module_example_test/drupal
-  - drush --yes pm-enable travis_ci_drupal_module_example
+  # reference and enable domain_mollom in build site
+  - ln -s $(readlink -e $(cd -)) domain_mollom/drupal/sites/all/modules/domain_mollom
+  - cd domain_mollom/drupal
+  - drush dl domain mollom
+  - drush --yes pm-enable domain_mollom
 
   # start a web server on port 8080, run in the background; wait for initialization
   - drush runserver 127.0.0.1:8080 &
   - until netstat -an 2>/dev/null | grep '8080.*LISTEN'; do true; done
 
-script: drush test-run 'Travis-CI Drupal Module Example' --uri=http://127.0.0.1:8080
+script: drush test-run --uri=http://127.0.0.1:8080
