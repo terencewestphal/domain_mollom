@@ -1,5 +1,5 @@
 <?php
-
+// 
 function mollom_domainwarnings() {
   return array(
     'mollom_admin_settings'
